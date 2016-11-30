@@ -31,8 +31,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="4BH-4U-bC2">
-                                <rect key="frame" x="75" y="334" width="225" height="60"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="4BH-4U-bC2">
+                                <rect key="frame" x="77.5" y="334" width="220" height="60"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6b8-kK-Ow1">
                                         <rect key="frame" x="0.0" y="0.0" width="100" height="60"/>
@@ -42,7 +42,7 @@
                                         <state key="normal" title="Play"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OEy-cG-vLa">
-                                        <rect key="frame" x="125" y="0.0" width="100" height="60"/>
+                                        <rect key="frame" x="120" y="0.0" width="100" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="100" id="OkP-12-ilP"/>
                                         </constraints>
@@ -57,12 +57,21 @@
                                     <constraint firstItem="6b8-kK-Ow1" firstAttribute="top" secondItem="4BH-4U-bC2" secondAttribute="top" id="wTM-ZV-g3y"/>
                                 </constraints>
                             </stackView>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ixA-q4-J4N">
+                                <rect key="frame" x="0.0" y="437" width="375" height="230"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="230" id="ECD-ak-xeJ"/>
+                                </constraints>
+                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="kMF-Si-uyz" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="209" id="6ne-mU-zlz"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ixA-q4-J4N" secondAttribute="bottom" id="LK2-uD-6Jf"/>
+                            <constraint firstItem="ixA-q4-J4N" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="PCa-4O-YOd"/>
                             <constraint firstItem="4BH-4U-bC2" firstAttribute="top" secondItem="kMF-Si-uyz" secondAttribute="bottom" constant="45" id="Q6q-Ph-Pl8"/>
                             <constraint firstItem="4BH-4U-bC2" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="VWT-Hu-aAW"/>
+                            <constraint firstAttribute="trailing" secondItem="ixA-q4-J4N" secondAttribute="trailing" id="dFM-WT-28x"/>
                             <constraint firstItem="kMF-Si-uyz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="qE8-bc-rs1"/>
                         </constraints>
                     </view>
