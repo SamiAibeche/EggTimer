@@ -40,6 +40,9 @@
                                             <constraint firstAttribute="width" constant="100" id="FUd-cj-kGo"/>
                                         </constraints>
                                         <state key="normal" title="Play"/>
+                                        <connections>
+                                            <action selector="playMinuteurAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bEH-mx-DT1"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OEy-cG-vLa">
                                         <rect key="frame" x="120" y="0.0" width="100" height="60"/>
@@ -47,6 +50,9 @@
                                             <constraint firstAttribute="width" constant="100" id="OkP-12-ilP"/>
                                         </constraints>
                                         <state key="normal" title="Reset"/>
+                                        <connections>
+                                            <action selector="resetMinuteurAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FgQ-Cr-bVo"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -75,6 +81,11 @@
                             <constraint firstItem="kMF-Si-uyz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="qE8-bc-rs1"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="minuteurLabel" destination="kMF-Si-uyz" id="IXS-NJ-Hua"/>
+                        <outlet property="pickerView" destination="ixA-q4-J4N" id="RGE-wX-uQq"/>
+                        <outlet property="playMinuteurBtn" destination="6b8-kK-Ow1" id="U2i-yr-Pa7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
