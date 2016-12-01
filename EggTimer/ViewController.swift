@@ -7,11 +7,15 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
     var pickerInfo:[String] = []
     var tempsCuisson:Int = 0
+    var timer:Timer = Timer()
+    var lecteur:AVAudioPlayer = AVAudioPlayer()
+    var flag:Bool = false
     
     //Outlets
     @IBOutlet weak var minuteurLabel: UILabel!
@@ -21,16 +25,22 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     @IBOutlet weak var pickerView: UIPickerView!
     
     //Action
-    @IBAction func resetMinuteurAction(_ sender: UIButton) {
+    @IBAction func resetMinuteurAction(_
+        sender: UIButton) {
+        resetCompteur()
+        
     }
     @IBAction func playMinuteurAction(_ sender: UIButton) {
+        
+        compteur()
     }
     
     func selectionCuisson(selector: Int){
         
         switch selector {
         case 0:
-            tempsCuisson = 540
+            //tempsCuisson = 540
+            tempsCuisson = 5
             minuteurLabel.text = minuteurString(temps: tempsCuisson)
             
             break
@@ -61,6 +71,10 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
             break
             
         }
+        
+        playMinuteurBtn.isEnabled = true
+        playMinuteurBtn.alpha = 1
+        minuteurLabel.textColor = UIColor.black
     }
     
     func minuteurString(temps: Int)->String{
@@ -70,6 +84,70 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
         
         return String(format: "%02i:%02i:%02i", heure, min, sec)
         
+    }
+    
+    func compteur (){
+        
+        if (!flag) {
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(ViewController.incrementer), userInfo: nil, repeats: true)
+            timer.fire()
+            playMinuteurBtn.setTitle("Pause", for: UIControlState.normal)
+            playMinuteurBtn.setTitleColor(UIColor.orange, for: UIControlState.normal)
+            flag = true
+        } else {
+            timer.invalidate()
+            playMinuteurBtn.setTitle("Play", for: UIControlState.normal)
+            playMinuteurBtn.setTitleColor(UIColor.blue, for: UIControlState.normal)
+            flag = false
+        }
+    }
+    func incrementer(){
+        
+        if(tempsCuisson == 0){
+            timer.invalidate()
+            minuteurLabel.text = "00:00:00"
+            playMinuteurBtn.setTitle("Play", for: UIControlState.normal)
+            playMinuteurBtn.setTitleColor(UIColor.blue, for: UIControlState.normal)
+            playMinuteurBtn.isEnabled = false
+            playMinuteurBtn.alpha = 0.3
+            flag = false
+            minuteurLabel.textColor = UIColor.green
+            lecteur.play()
+        } else {
+            tempsCuisson -= 1
+            minuteurLabel.text = minuteurString(temps: tempsCuisson)
+            
+        }
+        
+    }
+    func resetCompteur(){
+        timer.invalidate()
+        tempsCuisson = 0
+        minuteurLabel.text = "00:00:00"
+        playMinuteurBtn.setTitle("Play", for: UIControlState.normal)
+        playMinuteurBtn.setTitleColor(UIColor.blue, for: UIControlState.normal)
+        playMinuteurBtn.isEnabled = false
+        playMinuteurBtn.alpha = 0.3
+        lecteur.stop()
+        minuteurLabel.textColor = UIColor.black
+        flag = false
+        
+        pickerView.selectRow(0, inComponent: 0, animated: true)
+        
+    }
+    
+    //Audio Player
+    
+    func alarm(){
+        let song = Bundle.main.path(forResource: "alarm", ofType: "mp3")
+        
+        do{
+        
+            try lecteur = AVAudioPlayer(contentsOf: URL(string: song!)!)
+        } catch {
+            print("Erreur de lecture")
+        }
+    
     }
     //MARK - PickerViewDataSource
     
@@ -89,11 +167,17 @@ class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        alarm()
         //Datasource + delegate à la vue
         pickerView.dataSource = self
         pickerView.delegate = self
         
         pickerInfo = ["Oeufs Durs","Oeuf à la coque", "Oeufs Mollet", "Oeufs Cocotte", "Oeufs Poché", "Omelette Baveuse"]
+        
+        playMinuteurBtn.setTitleColor(UIColor.blue, for: UIControlState.normal)
+        
+        playMinuteurBtn.isEnabled = false
+        playMinuteurBtn.alpha = 0.3
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
