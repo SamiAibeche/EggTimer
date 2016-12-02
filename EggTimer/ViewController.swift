@@ -11,38 +11,39 @@ import AVFoundation
 
 class ViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
+    //Déclaration des variables
     var pickerInfo:[String] = []
     var tempsCuisson:Int = 0
-    var timer:Timer = Timer()
-    var lecteur:AVAudioPlayer = AVAudioPlayer()
-    var flag:Bool = false
+    
+    var timer:Timer = Timer() //Ajout de la class Timer
+    var lecteur:AVAudioPlayer = AVAudioPlayer() //Initialisation du lecteur de musique
+    var flag:Bool = false //Flag (Si on est à la fin du timer)
     
     //Outlets
     @IBOutlet weak var minuteurLabel: UILabel!
-    
     @IBOutlet weak var playMinuteurBtn: UIButton!
-    
     @IBOutlet weak var pickerView: UIPickerView!
     
     //Action
-    @IBAction func resetMinuteurAction(_
-        sender: UIButton) {
+    @IBAction func resetMinuteurAction(_ sender: UIButton) {
+        
+        //Lancement du "resetCompteur" lors du clic sur "Play"
         resetCompteur()
         
     }
     @IBAction func playMinuteurAction(_ sender: UIButton) {
         
+        //Lancement de la fonction "compteur" lors du clic sur "Play"
         compteur()
     }
     
+    //Switch Case qui initialise le compteur lorsque le type de cuisson voulu est sélectionné
     func selectionCuisson(selector: Int){
         
         switch selector {
         case 0:
-            //tempsCuisson = 540
-            tempsCuisson = 5
+            //Initialisation du compteur en seconde
             minuteurLabel.text = minuteurString(temps: tempsCuisson)
-            
             break
             
         case 1:
